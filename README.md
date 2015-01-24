@@ -5,6 +5,7 @@ A function which takes two jsons and returns a list of changes from the first to
 # Format of output
 
 Let's say we have two json objects:
+```
 var orig = { 
 	"first": { 
 		"second": { 
@@ -21,6 +22,7 @@ var changed = {
 		} 
 	} 
 };
+```
 
 There are three operations, and their format is as follows:
 add					-					{ at:"first.second.one", wasAdded:"newVal" }
