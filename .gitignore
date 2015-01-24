@@ -1,3 +1,7 @@
 # node_modules (we really don't need to store this in the repository, surely)
 
 node_modules
+
+# you can also build the thing yourself; I'm not going to do it for you
+
+publish
