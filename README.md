@@ -26,9 +26,9 @@ var changed = {
 
 There are three operations, and their format is as follows:
 ```
-add				-			{ at:"first.second.one", wasAdded:"newVal" }
-remove			-			{ at:"first.second.two", wasRemoved:"oldVal" }
-edit			-			{ at:"first.second.three", changed:"origVal", to:"changedVal"}
+add			-			{ at:"first.second.one", wasAdded:"newVal" }
+remove		-			{ at:"first.second.two", wasRemoved:"oldVal" }
+edit		-			{ at:"first.second.three", changed:"origVal", to:"changedVal"}
 ```
 
 and the output would be an array consisting of each of these
