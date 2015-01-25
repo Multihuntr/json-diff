@@ -29,7 +29,7 @@ var changed = {
 There are three possibilities for each change, and their formats are as follows:
 ```
 add			-			{ at:"first.second.one", added:"newVal" }
-remove		-			{ at:"first.second.two", wasRemoved:"oldVal" }
+remove		-			{ at:"first.second.two", removed:"oldVal" }
 change		-			{ at:"first.second.three", changed:"origVal", to:"changedVal"}
 ```
 
@@ -41,7 +41,7 @@ will return
 ```
 [
 	{ at:"first.second.one", added:"newVal" },
-	{ at:"first.second.two", wasRemoved:"oldVal" },
+	{ at:"first.second.two", removed:"oldVal" },
 	{ at:"first.second.three", changed:"origVal", to:"changedVal"}
 ]
 ```
@@ -84,7 +84,7 @@ jsonDiff(one, two);
 will return
 ```
 [
-	{ at: "first.one", wasRemoved: 1 },
+	{ at: "first.one", removed: 1 },
 	{ at: "first.two", added: 2 }
 ]
 ```
