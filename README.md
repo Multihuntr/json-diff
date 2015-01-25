@@ -65,22 +65,19 @@ By default it ignores the order of an array. If this option is set to true, then
 
 <b>NOTE</b>: This option may not function how you expect it to for arrays of objects. 'Change' is only triggered on primitive data types (see: [`Nested Objects`](#nested-objects))
 
-# Format of output
-
-
 
 # Nested objects
 
 Firstly, in the case of nested objects (in the previous case 'first' and 'second' would be nested objects), the path to the changed property will be the objects key inside it's parent, followed by a '.' character. That is, any property inside the 'first' object will have "first." prefixed to it's key to tell you that it is inside "first".
 
-Secondly; 'change' is only triggered on primitive data types (Numbers and Strings). It will assume that the nested object is the 'same' and so will find removals and additions
+Secondly; 'change' is only triggered on primitive data types (Numbers and Strings). It will assume that the nested object is the same object and so will find removals and additions
 For example:
 ```
 var one = { first: { one: 1 } };
 var two = { first: { two: 2 } };
-var difs = jsonDiff(one, two);
+jsonDiff(one, two);
 ```
-will set 'difs' to:
+will return
 ```
 [
 	{ at: "first.one", wasRemoved: 1 },
@@ -93,5 +90,11 @@ eg.
 ```
 var one = { first: 1 };
 var two = { first: {one: 1} };
-jsonDiff(one, two); //will return [{ at:"one", changed: 1, to: {one: 1} }]
+jsonDiff(one, two);
+```
+will return
+```
+[
+	{ at:"one", changed: 1, to: {one: 1} }
+]
 ```

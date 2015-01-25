@@ -162,6 +162,7 @@ describe("additions", function() {
 	
 	describe("arrays", function() {
 		
+		
 		it("default", function() {
 			var one = { one: [{one: 1}, 2, 3] };
 			var two = { one: [2, {one: 1}, {two: 2}, 3] };
@@ -180,6 +181,7 @@ describe("additions", function() {
 				{ at: "one.3", added: 3 }
 			]);
 		});
+		
 		
 	});
 	
@@ -323,6 +325,7 @@ describe("removals", function() {
 	
 	describe("arrays", function() {
 		
+		
 		it("default", function() {
 			var one = { one: [{one: 1}, 2, {three: 3}] };
 			var two = { one: [2, {one: 1}] };
@@ -341,6 +344,7 @@ describe("removals", function() {
 			]);
 		});
 		
+		
 	});
 
 
@@ -353,7 +357,9 @@ describe("removals", function() {
 describe("changes", function() {
 	
 	
+	
 	describe("primitive data types", function() {
+		
 		
 		describe("first level", function() {
 			
@@ -375,11 +381,37 @@ describe("changes", function() {
 			
 		});
 		
+		
     });
 	
 	
-	describe("arrays", function() {
+	
+	describe("change between object and primitive data type", function() {
 		
+		
+		it("works from object to primitive", function() {
+			var one = { one: { secondone: { thirdone: 1 } } };
+			var two = { one: { secondone: 1 } };
+			expect(jsonDiff(one,two)).toEqual([
+				{ at: "one.secondone", changed: { thirdone: 1 }, to: 1}
+			])
+		});
+		
+		it("works from primitive to object", function() {
+			var one = { one: { secondone: 1 } };
+			var two = { one: { secondone: { thirdone: 1 } } };
+			expect(jsonDiff(one,two)).toEqual([
+				{ at: "one.secondone", changed: 1, to: { thirdone: 1 } }
+			])
+		});
+		
+		
+	});
+	
+	
+	describe("arrays", function() {
+
+	
 		it("changes order", function() {
 			var one = { one: [{one: 1}, 2, {three: 3}] };
 			var two = { one: [{three: 3}, {one: 1}, 2] };
@@ -395,7 +427,8 @@ describe("changes", function() {
 				{ at: "one.2", changed: 3, to: 2}
 			]);
 		});
-		
+	
+	
 	});
 	
 	
