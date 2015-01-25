@@ -1,36 +1,6 @@
 # About
 
 A function which takes two jsons and returns a list of changes from the first to the second. No command-line, no need for 'node-document'. Just a function; you can do with it what you want.
-e.g.
-```
-jsonDiff({one: 1},{one: 11, two:2});
-```
-will return: 
-```
-[
-	{ at: "one", changed: 1, to: 11 },
-	{ at: "two", added: 2}
-]
-```
-
-# Options
-The third (optional) parameter is called 'options' (guess what it does)
-It's should be an object and depending on what you want, should have one or more of these properties
-<h3>objectStructure</h3>
-If this is set to true, it will return the differences in an object structure, instead of the default array.
-e.g. the above example would be returned as:
-```
-{
-	changes: [{ at: "one", changed: 1, to: 11 }],
-	additions: [{ at: "two", added: 2}],
-	removals: []
-}
-```
-<h3>arrayOrderImportant</h3>
-If this is set to true, then it will list any changes in order to the array as 'changed' listing the original value at that index and what the value of that index is now. Effectively; this treats arrays as objects, as order being important is really the only difference between them.
-NOTE: This option may not function how you expect it to for arrays of objects. 'Change' is only triggered on primitive data types (see: [`Nested Objects`](#nested-objects))
-
-# Format of output
 
 Let's say we have two json objects:
 ```
@@ -52,14 +22,52 @@ var changed = {
 };
 ```
 
-There are three operations, and their format is as follows:
+There are three possibilities for each change, and their formats are as follows:
 ```
 add			-			{ at:"first.second.one", added:"newVal" }
 remove		-			{ at:"first.second.two", wasRemoved:"oldVal" }
 change		-			{ at:"first.second.three", changed:"origVal", to:"changedVal"}
 ```
 
-and the output would be an array consisting of each of these
+so
+```
+jsonDiff(orig, changed);
+```
+will return 
+```
+[
+	{ at:"first.second.one", added:"newVal" },
+	{ at:"first.second.two", wasRemoved:"oldVal" },
+	{ at:"first.second.three", changed:"origVal", to:"changedVal"}
+]
+```
+
+# Options
+The third (optional) parameter is called 'options' (guess what it does)
+It's should be an object and depending on what you want, should have one or more of these properties:
+<h3>objectStructure</h3>
+If this is set to true, it will return in an object structure, instead of the default array.
+
+e.g. if you were to call
+```
+jsonDiff({one: 1}, {one: 11, two:2}, {objectStructure: true});
+```
+then the response would be:
+```
+{
+	changes: [{ at: "one", changed: 1, to: 11 }],
+	additions: [{ at: "two", added: 2}],
+	removals: []
+}
+```
+<h3>arrayOrderImportant</h3>
+By default it ignores the order of an array. If this option is set to true, then it will list any changes to the order of the elements as actual changes. Effectively; this treats arrays as objects, as order being important is really the only difference between them.
+
+<b>NOTE</b>: This option may not function how you expect it to for arrays of objects. 'Change' is only triggered on primitive data types (see: [`Nested Objects`](#nested-objects))
+
+# Format of output
+
+
 
 # Nested objects
 
@@ -87,7 +95,3 @@ var one = { first: 1 };
 var two = { first: {one: 1} };
 jsonDiff(one, two); //will return [{ at:"one", changed: 1, to: {one: 1} }]
 ```
-
-# Arrays
-
-By it ignores the order of an array, and just tells you the position of any additions or removals.
