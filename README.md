@@ -1,6 +1,10 @@
 # About
 
-A function which takes two jsons and returns a list of changes from the first to the second. No command-line, no need for 'node-document'. Just a function; you can do with it what you want.
+A small project created because I couldn't find a proper json diff function on the internet. A function which takes two jsons and returns a list of changes from the first to the second. No command-line, no need for 'node-document'. Just a function; you can do with it what you want.
+
+Turns out someone HAS made what I wanted, but I didn't find it before spending time on this. If you've found this page, I recommend https://www.npmjs.com/package/deep-diff
+
+It looks like they've spent some significant time on theirs.
 
 Let's say we have two json objects:
 ```

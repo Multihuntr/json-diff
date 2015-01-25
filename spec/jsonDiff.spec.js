@@ -2,7 +2,7 @@
 /* global describe, it, expect, jasmine */
 'use strict';
 
-var jsonDiff = require('../jsonDiff.js');
+var jsonDiff = require('../json-diff.js');
 
 describe("no difference", function() {
 		
