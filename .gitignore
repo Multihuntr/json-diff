@@ -5,3 +5,7 @@ node_modules
 # you can also build the thing yourself; I'm not going to do it for you
 
 publish
+
+# debugging logs not required
+
+npm-debug.log
