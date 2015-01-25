@@ -95,6 +95,6 @@ jsonDiff(one, two);
 will return
 ```
 [
-	{ at:"one", changed: 1, to: {one: 1} }
+	{ at:"first", changed: 1, to: {one: 1} }
 ]
 ```
